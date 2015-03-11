@@ -13,5 +13,8 @@
 
 @property (weak) IBOutlet NSTableView *tableView;
 
+@property NSManagedObjectContext* moc;
+@property (nonatomic, strong) NSArray* items;
+
 @end
 
