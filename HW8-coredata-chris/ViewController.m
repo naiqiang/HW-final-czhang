@@ -99,7 +99,7 @@
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return self.items.count;
+    return self.items.count + 1;
 }
 
 
@@ -112,6 +112,14 @@
 {
     NSLog(@"%@",[NSString stringWithFormat:@"%ldl",(long)row ]);
     
+    if ( row >= self.items.count)
+    {
+        // the last one
+        NSView* view = [self.tableView makeViewWithIdentifier:@"NewInventoryView" owner:self];
+        return view;
+    }
+    else
+    {
     CustomCellView* view = [self.tableView makeViewWithIdentifier:@"InventoryView" owner:self];
     
     [view.imageView2 setImage:[NSImage imageNamed:@"background.png"]];
@@ -141,10 +149,9 @@
 //    
 //            return view;
 //        }
-
     
     return view;
-    
+    }
 }
 
 -(NSColor*)backgroundColor1
