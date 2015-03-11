@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+IB_DESIGNABLE
 @interface CustomCellView : NSTableCellView
 
 @property (weak) IBOutlet NSImageView *imageView;

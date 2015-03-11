@@ -15,6 +15,10 @@
     
     // Drawing code here.
     
+    if (self.backgroundColor==nil){
+        self.backgroundColor = [NSColor lightGrayColor];
+    }
+    
     [self.backgroundColor set];
     
     [NSBezierPath fillRect:self.bounds];
