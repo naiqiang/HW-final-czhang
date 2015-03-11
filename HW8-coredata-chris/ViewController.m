@@ -40,27 +40,59 @@
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
-    return 3;
+    return 20;
 }
 
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-    return 200;
+    return 170;
 }
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    NSTableCellView* view =    [self.tableView makeViewWithIdentifier:@"Cell2" owner:self];
+    NSLog(@"%@",[NSString stringWithFormat:@"%ldl",(long)row ]);
+    
+    CustomCellView* view = [self.tableView makeViewWithIdentifier:@"InventoryView" owner:self];
+    
+    [view.imageView2 setImage:[NSImage imageNamed:@"background.png"]];
+    view.label.stringValue = @"string";
+    
+    if ( row %2 ==0 )
+    {
+        CGFloat R = 0.6;
+        CGFloat G = 0.8;
+        CGFloat B = 0.6;
+        CGFloat A = 0.5;
+        
+        view.backgroundColor = [NSColor colorWithSRGBRed:R green:G blue:B alpha:A];
+    }
+    else
+    {
+        CGFloat R = 0.6;
+        CGFloat G = 0.6;
+        CGFloat B = 0.8;
+        CGFloat A = 0.7;
+        
+        view.backgroundColor = [NSColor colorWithSRGBRed:R green:G blue:B alpha:A];
+    }
+    
+    [view setNeedsDisplay:YES];
+    
+//        {
+//            NSTableCellView* view =    [self.tableView  makeViewWithIdentifier:@"CellWithImage" owner:self];
+//    
+//            view.textField.stringValue = [NSString stringWithFormat:@"Row %ld",(long)row];
+//    
+//            NSImage* image = [NSImage imageNamed:@"background.png"];
+//
+//            [view.imageView setImage:image];
+//    
+//            return view;
+//        }
 
     
-    view.textField.stringValue = [NSString stringWithFormat:@"Row %ld",(long)row];
-    
-    NSImage* image = [NSImage imageNamed:@"background.png"];
-
-    [view.imageView setImage:image];
-    
-    return view;
+            return view;
     
 }
 

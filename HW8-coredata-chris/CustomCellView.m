@@ -10,22 +10,15 @@
 
 @implementation CustomCellView
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self != nil)
-    {
-    [self addSubview:self.imageView];
-    [self addSubview:self.label];
-    }
-    return self;
-}
-
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];
     
     // Drawing code here.
     
+    [self.backgroundColor set];
+    
+    [NSBezierPath fillRect:self.bounds];
+
 }
 
 @end

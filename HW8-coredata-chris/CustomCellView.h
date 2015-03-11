@@ -12,4 +12,8 @@
 
 @property (weak) IBOutlet NSImageView *imageView;
 @property (weak) IBOutlet NSTextField *label;
+@property (weak) IBOutlet NSImageView *imageView2;
+
+@property (nonatomic, strong) NSColor* backgroundColor;
+
 @end
