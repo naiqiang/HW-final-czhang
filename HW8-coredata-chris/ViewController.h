@@ -16,5 +16,8 @@
 @property NSManagedObjectContext* moc;
 @property (nonatomic, strong) NSArray* items;
 
+@property (weak) IBOutlet NSTextField *addNewInvTextField;
+@property (weak) IBOutlet NSButton *addNewInvButton;
+
 @end
 

@@ -10,6 +10,7 @@
 #import "CustomCellView.h"
 #import "ConfigurableCoreDataStack.h"
 #import "Item.h"
+#import "NewInventoryView.h"
 
 @interface ViewController()
 
@@ -44,7 +45,6 @@
     self.moc = stack.managedObjectContext;
     
     // now retrieve all items from data store
-    //[self doit];
     self.items = [self fetchItems];
 }
 
@@ -54,14 +54,38 @@
     // Update the view, if already loaded.
 }
 
--(NSArray*)doit
+//-(NSArray*)doit
+//{
+//    //@@ insert item
+//    Item* item = [Item createInMoc:self.moc];
+//    
+//    item.title = @"Used car - 98 civic, in great shape. needs repair. bumps. 120k miles. only $1500.";
+//    
+//    NSLog(@"%@", item);
+//    
+//    NSError* error = nil;
+//    BOOL success = [self.moc save:&error];
+//    if(!success)
+//    {
+//        [[NSApplication sharedApplication] presentError:error];
+//    }
+//    
+//    //@@ fetch item
+//    NSFetchRequest* req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
+//    NSError* error2 = nil;
+//    NSArray* allItems = [self.moc executeFetchRequest:req error:&error2];
+//    
+//    NSLog(@"%@", allItems);
+//    for(Item* i in allItems){
+//        NSLog(@"%@", i.title);
+//    }
+//    return allItems;
+//}
+
+-(BOOL)addItem:(NSString*)text
 {
-    //@@ insert item
     Item* item = [Item createInMoc:self.moc];
-    
-    item.title = @"Used car - 98 civic, in great shape. needs repair. bumps. 120k miles. only $1500.";
-    
-    NSLog(@"%@", item);
+    item.title = text;
     
     NSError* error = nil;
     BOOL success = [self.moc save:&error];
@@ -69,17 +93,7 @@
     {
         [[NSApplication sharedApplication] presentError:error];
     }
-    
-    //@@ fetch item
-    NSFetchRequest* req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-    NSError* error2 = nil;
-    NSArray* allItems = [self.moc executeFetchRequest:req error:&error2];
-    
-    NSLog(@"%@", allItems);
-    for(Item* i in allItems){
-        NSLog(@"%@", i.title);
-    }
-    return allItems;
+    return success;
 }
 
 -(NSArray*)fetchItems
@@ -97,6 +111,25 @@
     return allItems;
 }
 
+-(BOOL)deleteItem:(NSString*)text
+{
+    for(Item* item in self.items)
+    {
+        if ( [item.title isEqualToString:text] )
+        {
+            [self.moc deleteObject:item];
+        
+            NSError* error = nil;
+            BOOL success = [self.moc save:&error];
+            if(!success)
+            {
+                [[NSApplication sharedApplication] presentError:error];
+            }
+            return success;
+        }
+    }
+    return NO;
+}
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
     return self.items.count + 1;
@@ -105,7 +138,14 @@
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row
 {
-    return 170;
+    if ( row >= self.items.count)
+    {
+        return 75 + 2*10;
+    }
+    else
+    {
+        return 150 + 10*2;
+    }
 }
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
@@ -115,42 +155,32 @@
     if ( row >= self.items.count)
     {
         // the last one
-        NSView* view = [self.tableView makeViewWithIdentifier:@"NewInventoryView" owner:self];
+        NewInventoryView* view = [self.tableView makeViewWithIdentifier:@"NewInventoryView" owner:self];
+        view.addInvButton.image = [NSImage imageNamed:@"list-add.png"];
         return view;
     }
     else
     {
-    CustomCellView* view = [self.tableView makeViewWithIdentifier:@"InventoryView" owner:self];
+        CustomCellView* view = [self.tableView makeViewWithIdentifier:@"InventoryView" owner:self];
     
-    [view.imageView2 setImage:[NSImage imageNamed:@"background.png"]];
+        [view.imageView2 setImage:[NSImage imageNamed:@"background.png"]];
     
-    Item* item = (Item*)[self.items objectAtIndex:row];
-    view.label.stringValue = item.title;
+        Item* item = (Item*)[self.items objectAtIndex:row];
+        view.label.stringValue = item.title;
+        view.checkButton.image = [NSImage imageNamed:@"checkcross.png"];
     
-    if ( row %2 ==0 )
-    {
-        view.backgroundColor = self.bgColor1;
-    }
-    else
-    {
-        view.backgroundColor = self.bgColor2;
-    }
+        if ( row %2 ==0 )
+        {
+            view.backgroundColor = self.bgColor1;
+        }
+        else
+        {
+            view.backgroundColor = self.bgColor2;
+        }
     
-    [view setNeedsDisplay:YES];
+        [view setNeedsDisplay:YES];
     
-//        {
-//            NSTableCellView* view =    [self.tableView  makeViewWithIdentifier:@"CellWithImage" owner:self];
-//    
-//            view.textField.stringValue = [NSString stringWithFormat:@"Row %ld",(long)row];
-//    
-//            NSImage* image = [NSImage imageNamed:@"background.png"];
-//
-//            [view.imageView setImage:image];
-//    
-//            return view;
-//        }
-    
-    return view;
+        return view;
     }
 }
 
@@ -172,6 +202,24 @@
     CGFloat A = 0.5;
     
     return [NSColor colorWithSRGBRed:R green:G blue:B alpha:A];
+}
+
+- (IBAction)onClickAddNewInv:(id)sender {
+    NewInventoryView* view = (NewInventoryView*)[sender superview];
+    NSLog(@"add new inventory: %@", view.invDescTextField.stringValue);
+    
+    [self addItem:view.invDescTextField.stringValue];
+    self.items = [self fetchItems];
+    [self.tableView reloadData];
+}
+
+- (IBAction)onClickCheckButton:(id)sender {
+    CustomCellView* view = (CustomCellView*)[sender superview];
+    NSLog(@"delete inventory: %@", view.label.stringValue);
+
+    [self deleteItem: view.label.stringValue];
+    self.items = [self fetchItems];
+    [self.tableView reloadData];
 }
 
 @end

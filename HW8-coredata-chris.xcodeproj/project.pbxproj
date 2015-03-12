@@ -18,6 +18,9 @@
 		E1E637F41AB0138D00C4C177 /* ConfigurableCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E637F31AB0138D00C4C177 /* ConfigurableCoreDataStack.m */; };
 		E1E637F71AB0162F00C4C177 /* InventoryModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1E637F51AB0162F00C4C177 /* InventoryModel.xcdatamodeld */; };
 		E1E637FA1AB016BD00C4C177 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E637F91AB016BD00C4C177 /* Item.m */; };
+		E1E637FD1AB154E300C4C177 /* NewInventoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E637FC1AB154E300C4C177 /* NewInventoryView.m */; };
+		E1E638001AB15A7F00C4C177 /* checkcross.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E637FE1AB15A7F00C4C177 /* checkcross.png */; };
+		E1E638011AB15A7F00C4C177 /* list-add.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E637FF1AB15A7F00C4C177 /* list-add.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,14 +46,18 @@
 		E141EB701AAC2B5100043072 /* HW8-coredata-chrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "HW8-coredata-chrisTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E141EB751AAC2B5100043072 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E141EB761AAC2B5100043072 /* HW8_coredata_chrisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HW8_coredata_chrisTests.m; sourceTree = "<group>"; };
-		E141EB801AAEBA8B00043072 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		E141EB801AAEBA8B00043072 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = ../background.png; sourceTree = "<group>"; };
 		E1E442211AAECDF800F955C7 /* CustomCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellView.h; sourceTree = "<group>"; };
 		E1E442221AAECDF800F955C7 /* CustomCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellView.m; sourceTree = "<group>"; };
 		E1E637F21AB0138D00C4C177 /* ConfigurableCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurableCoreDataStack.h; sourceTree = "<group>"; };
 		E1E637F31AB0138D00C4C177 /* ConfigurableCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurableCoreDataStack.m; sourceTree = "<group>"; };
 		E1E637F61AB0162F00C4C177 /* InventoryModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InventoryModel.xcdatamodel; sourceTree = "<group>"; };
-		E1E637F81AB016BD00C4C177 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Item.h; path = "HW8-coredata-chris/Item.h"; sourceTree = "<group>"; };
-		E1E637F91AB016BD00C4C177 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Item.m; path = "HW8-coredata-chris/Item.m"; sourceTree = "<group>"; };
+		E1E637F81AB016BD00C4C177 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		E1E637F91AB016BD00C4C177 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
+		E1E637FB1AB154E300C4C177 /* NewInventoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewInventoryView.h; sourceTree = "<group>"; };
+		E1E637FC1AB154E300C4C177 /* NewInventoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewInventoryView.m; sourceTree = "<group>"; };
+		E1E637FE1AB15A7F00C4C177 /* checkcross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkcross.png; path = ../checkcross.png; sourceTree = "<group>"; };
+		E1E637FF1AB15A7F00C4C177 /* list-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list-add.png"; path = "../list-add.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +81,6 @@
 		E141EB511AAC2B5100043072 = {
 			isa = PBXGroup;
 			children = (
-				E1E637F81AB016BD00C4C177 /* Item.h */,
-				E1E637F91AB016BD00C4C177 /* Item.m */,
-				E141EB801AAEBA8B00043072 /* background.png */,
 				E1E637F21AB0138D00C4C177 /* ConfigurableCoreDataStack.h */,
 				E1E637F31AB0138D00C4C177 /* ConfigurableCoreDataStack.m */,
 				E141EB5C1AAC2B5100043072 /* HW8-coredata-chris */,
@@ -97,6 +101,9 @@
 		E141EB5C1AAC2B5100043072 /* HW8-coredata-chris */ = {
 			isa = PBXGroup;
 			children = (
+				E1E638041AB1689A00C4C177 /* images */,
+				E1E638031AB1687A00C4C177 /* data model */,
+				E1E638021AB1685E00C4C177 /* custom view */,
 				E141EB5F1AAC2B5100043072 /* AppDelegate.h */,
 				E141EB601AAC2B5100043072 /* AppDelegate.m */,
 				E141EB641AAC2B5100043072 /* ViewController.h */,
@@ -104,8 +111,6 @@
 				E141EB671AAC2B5100043072 /* Images.xcassets */,
 				E141EB691AAC2B5100043072 /* Main.storyboard */,
 				E141EB5D1AAC2B5100043072 /* Supporting Files */,
-				E1E442211AAECDF800F955C7 /* CustomCellView.h */,
-				E1E442221AAECDF800F955C7 /* CustomCellView.m */,
 				E1E637F51AB0162F00C4C177 /* InventoryModel.xcdatamodeld */,
 			);
 			path = "HW8-coredata-chris";
@@ -135,6 +140,36 @@
 				E141EB751AAC2B5100043072 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E1E638021AB1685E00C4C177 /* custom view */ = {
+			isa = PBXGroup;
+			children = (
+				E1E637FB1AB154E300C4C177 /* NewInventoryView.h */,
+				E1E637FC1AB154E300C4C177 /* NewInventoryView.m */,
+				E1E442211AAECDF800F955C7 /* CustomCellView.h */,
+				E1E442221AAECDF800F955C7 /* CustomCellView.m */,
+			);
+			name = "custom view";
+			sourceTree = "<group>";
+		};
+		E1E638031AB1687A00C4C177 /* data model */ = {
+			isa = PBXGroup;
+			children = (
+				E1E637F81AB016BD00C4C177 /* Item.h */,
+				E1E637F91AB016BD00C4C177 /* Item.m */,
+			);
+			name = "data model";
+			sourceTree = "<group>";
+		};
+		E1E638041AB1689A00C4C177 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				E141EB801AAEBA8B00043072 /* background.png */,
+				E1E637FE1AB15A7F00C4C177 /* checkcross.png */,
+				E1E637FF1AB15A7F00C4C177 /* list-add.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,6 +253,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E141EB681AAC2B5100043072 /* Images.xcassets in Resources */,
+				E1E638001AB15A7F00C4C177 /* checkcross.png in Resources */,
+				E1E638011AB15A7F00C4C177 /* list-add.png in Resources */,
 				E141EB811AAEBA8B00043072 /* background.png in Resources */,
 				E141EB6B1AAC2B5100043072 /* Main.storyboard in Resources */,
 			);
@@ -237,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E637FD1AB154E300C4C177 /* NewInventoryView.m in Sources */,
 				E1E637F71AB0162F00C4C177 /* InventoryModel.xcdatamodeld in Sources */,
 				E1E637F41AB0138D00C4C177 /* ConfigurableCoreDataStack.m in Sources */,
 				E141EB661AAC2B5100043072 /* ViewController.m in Sources */,
