@@ -11,6 +11,8 @@
 #import "ConfigurableCoreDataStack.h"
 #import "Item.h"
 #import "NewInventoryView.h"
+#import "CoreDataStackConfiguration.h"
+#import "NSManagedObject+Extensions.h"
 
 @interface ViewController()
 
@@ -36,7 +38,7 @@
     CoreDataStackConfiguration* config = [CoreDataStackConfiguration new];
     config.storeType = NSSQLiteStoreType;
     config.modelName = @"InventoryModel";// note: match the xcdatamodel file
-    config.appIdentifier = @"czhang.HW8.coredata";
+    config.appIdentifier = @"czhang.HW8.coredata.2";
     config.dataFileNameWithExtension = @"store.sqlite";
     config.searchPathDirectory = NSApplicationSupportDirectory;
     

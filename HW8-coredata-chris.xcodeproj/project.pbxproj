@@ -15,12 +15,17 @@
 		E141EB771AAC2B5100043072 /* HW8_coredata_chrisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E141EB761AAC2B5100043072 /* HW8_coredata_chrisTests.m */; };
 		E141EB811AAEBA8B00043072 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = E141EB801AAEBA8B00043072 /* background.png */; };
 		E1E442231AAECDF800F955C7 /* CustomCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E442221AAECDF800F955C7 /* CustomCellView.m */; };
-		E1E637F41AB0138D00C4C177 /* ConfigurableCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E637F31AB0138D00C4C177 /* ConfigurableCoreDataStack.m */; };
 		E1E637F71AB0162F00C4C177 /* InventoryModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1E637F51AB0162F00C4C177 /* InventoryModel.xcdatamodeld */; };
-		E1E637FA1AB016BD00C4C177 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E637F91AB016BD00C4C177 /* Item.m */; };
 		E1E637FD1AB154E300C4C177 /* NewInventoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E637FC1AB154E300C4C177 /* NewInventoryView.m */; };
 		E1E638001AB15A7F00C4C177 /* checkcross.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E637FE1AB15A7F00C4C177 /* checkcross.png */; };
 		E1E638011AB15A7F00C4C177 /* list-add.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E637FF1AB15A7F00C4C177 /* list-add.png */; };
+		E1E638071AB2C13100C4C177 /* NSManagedObject+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E638061AB2C13100C4C177 /* NSManagedObject+Extensions.m */; };
+		E1E6380C1AB2C1BA00C4C177 /* ConfigurableCoreDataStack.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E638091AB2C1BA00C4C177 /* ConfigurableCoreDataStack.m */; };
+		E1E6380D1AB2C1BA00C4C177 /* CoreDataStackConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E6380B1AB2C1BA00C4C177 /* CoreDataStackConfiguration.m */; };
+		E1E638101AB2C3C900C4C177 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E6380F1AB2C3C900C4C177 /* Location.m */; };
+		E1E638131AB2C3C900C4C177 /* Image.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E638121AB2C3C900C4C177 /* Image.m */; };
+		E1E638161AB2C3C900C4C177 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E638151AB2C3C900C4C177 /* Tag.m */; };
+		E1E638191AB2C3C900C4C177 /* Item.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E638181AB2C3C900C4C177 /* Item.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,15 +54,25 @@
 		E141EB801AAEBA8B00043072 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = ../background.png; sourceTree = "<group>"; };
 		E1E442211AAECDF800F955C7 /* CustomCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellView.h; sourceTree = "<group>"; };
 		E1E442221AAECDF800F955C7 /* CustomCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellView.m; sourceTree = "<group>"; };
-		E1E637F21AB0138D00C4C177 /* ConfigurableCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurableCoreDataStack.h; sourceTree = "<group>"; };
-		E1E637F31AB0138D00C4C177 /* ConfigurableCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurableCoreDataStack.m; sourceTree = "<group>"; };
 		E1E637F61AB0162F00C4C177 /* InventoryModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InventoryModel.xcdatamodel; sourceTree = "<group>"; };
-		E1E637F81AB016BD00C4C177 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
-		E1E637F91AB016BD00C4C177 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 		E1E637FB1AB154E300C4C177 /* NewInventoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewInventoryView.h; sourceTree = "<group>"; };
 		E1E637FC1AB154E300C4C177 /* NewInventoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewInventoryView.m; sourceTree = "<group>"; };
 		E1E637FE1AB15A7F00C4C177 /* checkcross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkcross.png; path = ../checkcross.png; sourceTree = "<group>"; };
 		E1E637FF1AB15A7F00C4C177 /* list-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list-add.png"; path = "../list-add.png"; sourceTree = "<group>"; };
+		E1E638051AB2C13100C4C177 /* NSManagedObject+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+Extensions.h"; sourceTree = "<group>"; };
+		E1E638061AB2C13100C4C177 /* NSManagedObject+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+Extensions.m"; sourceTree = "<group>"; };
+		E1E638081AB2C1BA00C4C177 /* ConfigurableCoreDataStack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigurableCoreDataStack.h; sourceTree = "<group>"; };
+		E1E638091AB2C1BA00C4C177 /* ConfigurableCoreDataStack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigurableCoreDataStack.m; sourceTree = "<group>"; };
+		E1E6380A1AB2C1BA00C4C177 /* CoreDataStackConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataStackConfiguration.h; sourceTree = "<group>"; };
+		E1E6380B1AB2C1BA00C4C177 /* CoreDataStackConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataStackConfiguration.m; sourceTree = "<group>"; };
+		E1E6380E1AB2C3C900C4C177 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Location.h; sourceTree = "<group>"; };
+		E1E6380F1AB2C3C900C4C177 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
+		E1E638111AB2C3C900C4C177 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		E1E638121AB2C3C900C4C177 /* Image.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Image.m; sourceTree = "<group>"; };
+		E1E638141AB2C3C900C4C177 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tag.h; sourceTree = "<group>"; };
+		E1E638151AB2C3C900C4C177 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tag.m; sourceTree = "<group>"; };
+		E1E638171AB2C3C900C4C177 /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		E1E638181AB2C3C900C4C177 /* Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Item.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,8 +96,12 @@
 		E141EB511AAC2B5100043072 = {
 			isa = PBXGroup;
 			children = (
-				E1E637F21AB0138D00C4C177 /* ConfigurableCoreDataStack.h */,
-				E1E637F31AB0138D00C4C177 /* ConfigurableCoreDataStack.m */,
+				E1E638081AB2C1BA00C4C177 /* ConfigurableCoreDataStack.h */,
+				E1E638091AB2C1BA00C4C177 /* ConfigurableCoreDataStack.m */,
+				E1E6380A1AB2C1BA00C4C177 /* CoreDataStackConfiguration.h */,
+				E1E6380B1AB2C1BA00C4C177 /* CoreDataStackConfiguration.m */,
+				E1E638051AB2C13100C4C177 /* NSManagedObject+Extensions.h */,
+				E1E638061AB2C13100C4C177 /* NSManagedObject+Extensions.m */,
 				E141EB5C1AAC2B5100043072 /* HW8-coredata-chris */,
 				E141EB731AAC2B5100043072 /* HW8-coredata-chrisTests */,
 				E141EB5B1AAC2B5100043072 /* Products */,
@@ -155,9 +174,15 @@
 		E1E638031AB1687A00C4C177 /* data model */ = {
 			isa = PBXGroup;
 			children = (
+				E1E638171AB2C3C900C4C177 /* Item.h */,
+				E1E638181AB2C3C900C4C177 /* Item.m */,
+				E1E638141AB2C3C900C4C177 /* Tag.h */,
+				E1E638151AB2C3C900C4C177 /* Tag.m */,
+				E1E638111AB2C3C900C4C177 /* Image.h */,
+				E1E638121AB2C3C900C4C177 /* Image.m */,
+				E1E6380E1AB2C3C900C4C177 /* Location.h */,
+				E1E6380F1AB2C3C900C4C177 /* Location.m */,
 				E1E637F51AB0162F00C4C177 /* InventoryModel.xcdatamodeld */,
-				E1E637F81AB016BD00C4C177 /* Item.h */,
-				E1E637F91AB016BD00C4C177 /* Item.m */,
 			);
 			name = "data model";
 			sourceTree = "<group>";
@@ -274,13 +299,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1E638191AB2C3C900C4C177 /* Item.m in Sources */,
+				E1E638161AB2C3C900C4C177 /* Tag.m in Sources */,
+				E1E638131AB2C3C900C4C177 /* Image.m in Sources */,
 				E1E637FD1AB154E300C4C177 /* NewInventoryView.m in Sources */,
+				E1E6380C1AB2C1BA00C4C177 /* ConfigurableCoreDataStack.m in Sources */,
 				E1E637F71AB0162F00C4C177 /* InventoryModel.xcdatamodeld in Sources */,
-				E1E637F41AB0138D00C4C177 /* ConfigurableCoreDataStack.m in Sources */,
 				E141EB661AAC2B5100043072 /* ViewController.m in Sources */,
+				E1E6380D1AB2C1BA00C4C177 /* CoreDataStackConfiguration.m in Sources */,
 				E1E442231AAECDF800F955C7 /* CustomCellView.m in Sources */,
+				E1E638101AB2C3C900C4C177 /* Location.m in Sources */,
 				E141EB631AAC2B5100043072 /* main.m in Sources */,
-				E1E637FA1AB016BD00C4C177 /* Item.m in Sources */,
+				E1E638071AB2C13100C4C177 /* NSManagedObject+Extensions.m in Sources */,
 				E141EB611AAC2B5100043072 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
