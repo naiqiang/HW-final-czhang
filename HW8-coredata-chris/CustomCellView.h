@@ -11,9 +11,8 @@
 
 @interface CustomCellView : NSTableCellView
 
-@property (weak) IBOutlet NSImageView *imageView;
 @property (weak) IBOutlet NSTextField *label;
-@property (weak) IBOutlet NSImageView *imageView2;
+@property (weak) IBOutlet NSImageView *imageView;
 @property (weak) IBOutlet NSButton *checkButton;
 
 @property (nonatomic, strong) NSColor* backgroundColor;

@@ -111,7 +111,6 @@
 				E141EB671AAC2B5100043072 /* Images.xcassets */,
 				E141EB691AAC2B5100043072 /* Main.storyboard */,
 				E141EB5D1AAC2B5100043072 /* Supporting Files */,
-				E1E637F51AB0162F00C4C177 /* InventoryModel.xcdatamodeld */,
 			);
 			path = "HW8-coredata-chris";
 			sourceTree = "<group>";
@@ -156,6 +155,7 @@
 		E1E638031AB1687A00C4C177 /* data model */ = {
 			isa = PBXGroup;
 			children = (
+				E1E637F51AB0162F00C4C177 /* InventoryModel.xcdatamodeld */,
 				E1E637F81AB016BD00C4C177 /* Item.h */,
 				E1E637F91AB016BD00C4C177 /* Item.m */,
 			);

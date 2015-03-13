@@ -15,9 +15,9 @@
     
     // Drawing code here.
     
-//    if (self.backgroundColor==nil){
-//        self.backgroundColor = [NSColor lightGrayColor];
-//    }
+    if (self.backgroundColor==nil){
+        self.backgroundColor = [NSColor whiteColor];
+    }
     
     [self.backgroundColor set];
     

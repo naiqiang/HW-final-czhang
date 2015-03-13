@@ -157,58 +157,58 @@
         // the last one
         NewInventoryView* view = [self.tableView makeViewWithIdentifier:@"NewInventoryView" owner:self];
         view.addInvButton.image = [NSImage imageNamed:@"list-add.png"];
+        
         return view;
     }
     else
     {
         CustomCellView* view = [self.tableView makeViewWithIdentifier:@"InventoryView" owner:self];
     
-        [view.imageView2 setImage:[NSImage imageNamed:@"background.png"]];
-    
+        view.backgroundColor = ( row %2 ==0 ) ? self.bgColor1:self.bgColor2;
+        
         Item* item = (Item*)[self.items objectAtIndex:row];
         view.label.stringValue = item.title;
+        
         view.checkButton.image = [NSImage imageNamed:@"checkcross.png"];
     
-        if ( row %2 ==0 )
-        {
-            view.backgroundColor = self.bgColor1;
-        }
-        else
-        {
-            view.backgroundColor = self.bgColor2;
-        }
-    
-        [view setNeedsDisplay:YES];
-    
+//        [view.imageView setImage:[NSImage imageNamed:@"background.png"]];
+  
+        CGFloat x = 20+300+10;//view.label.bounds.origin.x + view.label.bounds.size.width+10;
+        CGFloat y= 10;
+        NSImageView* invImgView = [[NSImageView alloc] initWithFrame:CGRectMake(x, y, 150, 150)];
+        [invImgView setImage: [NSImage imageNamed:@"background.png"]];
+        
+        [view addSubview:invImgView];
+        
         return view;
     }
 }
 
 -(NSColor*)backgroundColor1
 {
-    CGFloat R = 0.6;
-    CGFloat G = 0.8;
-    CGFloat B = 0.6;
-    CGFloat A = 0.3;
+    CGFloat R = 0.7;
+    CGFloat G = 0.9;
+    CGFloat B = 0.7;
+    CGFloat A = 0.2;
     
     return [NSColor colorWithSRGBRed:R green:G blue:B alpha:A];
 }
 
 -(NSColor*)backgroundColor2
 {
-    CGFloat R = 0.6;
-    CGFloat G = 0.6;
-    CGFloat B = 0.8;
-    CGFloat A = 0.5;
+    CGFloat R = 0.7;
+    CGFloat G = 0.7;
+    CGFloat B = 0.9;
+    CGFloat A = 0.3;
     
     return [NSColor colorWithSRGBRed:R green:G blue:B alpha:A];
 }
 
 - (IBAction)onClickAddNewInv:(id)sender {
     NewInventoryView* view = (NewInventoryView*)[sender superview];
-    NSLog(@"add new inventory: %@", view.invDescTextField.stringValue);
+    NSLog(@"add new inventory: %@", view.invDescTextView.string);
     
-    [self addItem:view.invDescTextField.stringValue];
+    [self addItem:view.invDescTextView.string];
     self.items = [self fetchItems];
     [self.tableView reloadData];
 }

@@ -11,8 +11,7 @@
 IB_DESIGNABLE
 @interface NewInventoryView : NSTableCellView
 
-@property (weak) IBOutlet NSTextField *invDescTextField;
-
 @property (weak) IBOutlet NSButton *addInvButton;
+@property (unsafe_unretained) IBOutlet NSTextView *invDescTextView;
 
 @end
