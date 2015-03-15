@@ -86,6 +86,8 @@
 
 -(BOOL)addItem:(NSString*)text
 {
+    NSLog(@"adding %@", text);
+    
     Item* item = [Item createInMoc:self.moc];
     item.title = text;
     
@@ -105,9 +107,9 @@
     NSError* error = nil;
     NSArray* allItems = [self.moc executeFetchRequest:req error:&error];
     
-    NSLog(@"%@", allItems);
+    NSLog(@"fetched %ld items", allItems.count);
     for(Item* i in allItems){
-        NSLog(@"%@", i.title);
+        NSLog(@"title=%@", i.title);
     }
     
     return allItems;
