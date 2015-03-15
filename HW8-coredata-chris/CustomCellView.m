@@ -8,7 +8,23 @@
 
 #import "CustomCellView.h"
 
+
+@interface CustomCellView()
+@property NSColor* backgroundColor;
+@end
+
 @implementation CustomCellView
+
+
+-(void)useNormalBackgroundColor
+{
+    self.backgroundColor = [NSColor colorWithSRGBRed:0.7 green:0.9 blue:0.7 alpha:0.2];
+}
+
+-(void)useAlternativeBackgroundColor
+{
+    self.backgroundColor = [NSColor colorWithSRGBRed:0.7 green:0.7 blue:0.9 alpha:0.3];
+}
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];

@@ -15,6 +15,7 @@
 @property (weak) IBOutlet NSImageView *imageView;
 @property (weak) IBOutlet NSButton *checkButton;
 
-@property (nonatomic, strong) NSColor* backgroundColor;
+-(void)useNormalBackgroundColor;
+-(void)useAlternativeBackgroundColor;
 
 @end

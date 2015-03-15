@@ -16,9 +16,6 @@
 
 @interface ViewController()
 
-@property (nonatomic) NSColor* bgColor1;
-@property (nonatomic) NSColor* bgColor2;
-
 @end
 
 @implementation ViewController
@@ -30,9 +27,6 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
-    self.bgColor1 = [self backgroundColor1];
-    self.bgColor2 = [self backgroundColor2];
     
     // now setup the core data stack
     CoreDataStackConfiguration* config = [CoreDataStackConfiguration new];
@@ -168,7 +162,7 @@
     {
         CustomCellView* view = [self.tableView makeViewWithIdentifier:@"InventoryView" owner:self];
     
-        view.backgroundColor = ( row %2 ==0 ) ? self.bgColor1:self.bgColor2;
+        ( row %2 ==0 ) ? [view useNormalBackgroundColor] : [view useAlternativeBackgroundColor];
         
         Item* item = (Item*)[self.items objectAtIndex:row];
         view.label.stringValue = item.title;
@@ -188,25 +182,6 @@
     }
 }
 
--(NSColor*)backgroundColor1
-{
-    CGFloat R = 0.7;
-    CGFloat G = 0.9;
-    CGFloat B = 0.7;
-    CGFloat A = 0.2;
-    
-    return [NSColor colorWithSRGBRed:R green:G blue:B alpha:A];
-}
-
--(NSColor*)backgroundColor2
-{
-    CGFloat R = 0.7;
-    CGFloat G = 0.7;
-    CGFloat B = 0.9;
-    CGFloat A = 0.3;
-    
-    return [NSColor colorWithSRGBRed:R green:G blue:B alpha:A];
-}
 
 - (IBAction)onClickAddNewInv:(id)sender {
     NewInventoryView* view = (NewInventoryView*)[sender superview];
