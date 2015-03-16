@@ -16,7 +16,7 @@
 #import "Image.h"
 
 @interface ViewController()
-@property NSString* title;
+//@property NSString* pendingTitle;
 @property NSMutableSet* pendingImages;
 @property NSMutableSet* pendingTags;
 @end
@@ -36,7 +36,7 @@
     CoreDataStackConfiguration* config = [CoreDataStackConfiguration new];
     config.storeType = NSSQLiteStoreType;
     config.modelName = @"InventoryModel";
-    config.appIdentifier = @"czhang.HW8.coredata.7";
+    config.appIdentifier = @"czhang.HW.coredata";
     config.dataFileNameWithExtension = @"store.sqlite";
     config.searchPathDirectory = NSApplicationSupportDirectory;
     
@@ -47,10 +47,10 @@
     //
     // retrieve all the items from data store
     //
-    
+//    [stack removeCoreDataFilesFromDisk];    
     self.items = [Item fetchAllItemsInContext:self.moc];
     
-    self.title = nil;
+//    self.pendingTitle = @"";
     self.pendingImages = [NSMutableSet new];
     self.pendingTags = [NSMutableSet new];
 }
@@ -61,19 +61,6 @@
     // Update the view, if already loaded.
 }
 
-
--(BOOL)deleteItem:(Item*)item
-{
-    [self.moc deleteObject:item];
-    
-    NSError* error = nil;
-    BOOL success = [self.moc save:&error];
-    if(!success)
-    {
-        [[NSApplication sharedApplication] presentError:error];
-    }
-    return success;
-}
 
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
@@ -116,6 +103,7 @@
         CGFloat div = 5;
         
         [self addImages:self.pendingImages toView:view startingAt:NSMakeRect(x, y, wh, wh) withHorizontalDiv:div];
+//        view.invDescTextView.string = self.pendingTitle;
 
         return view;
     }
@@ -167,6 +155,22 @@
     NewItemView* view = (NewItemView*)[sender superview];
     NSLog(@"add new inventory: %@", view.invDescTextView.string);
     
+    if ([view.invDescTextView.string isEqualToString:@""])
+    {
+        // get the main/default SB
+        NSStoryboard* sb=
+        [NSStoryboard storyboardWithName:@"Main"  bundle:nil];
+        
+        // get the VC by its id
+        NSViewController* vc = [sb instantiateControllerWithIdentifier:@"PopupViewController"];
+        [self presentViewController:vc  asPopoverRelativeToRect:view.invDescTextView.bounds
+                             ofView:view
+                      preferredEdge:NSMaxYEdge
+                           behavior:NSPopoverBehaviorTransient];
+        
+        return;
+    }
+
     NSString* title = view.invDescTextView.string;
     Item* newItem = [Item createItemInMoc:self.moc withTitle:title withImages:self.pendingImages withTags:self.pendingTags];
     if (newItem == nil ){
@@ -177,6 +181,8 @@
         self.items = [Item fetchAllItemsInContext:self.moc];
         [self.tableView reloadData];
     }
+    
+//    self.pendingTitle = @"";
     self.pendingImages = [NSMutableSet new];
     self.pendingTags = [NSMutableSet new];
 }
@@ -186,6 +192,7 @@
     
     NSOpenPanel *op = [NSOpenPanel openPanel];
     op.directoryURL = [NSURL fileURLWithPath:[@"~/Downloads" stringByExpandingTildeInPath]];
+    op.allowsMultipleSelection=YES;
     
     [op beginWithCompletionHandler:^(NSInteger returnCode)
      {
@@ -229,7 +236,7 @@
     InventoryView* view = (InventoryView*)[sender superview];
     NSLog(@"delete inventory: %@", view.item.title);
 
-    [self deleteItem: view.item];
+    [Item deleteItem:view.item fromMoc:self.moc];
     
     self.items = [Item fetchAllItemsInContext:self.moc];
     [self.tableView reloadData];

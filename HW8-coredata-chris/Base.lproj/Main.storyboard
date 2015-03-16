@@ -853,5 +853,28 @@
             </objects>
             <point key="canvasLocation" x="75" y="814"/>
         </scene>
+        <!--Popup View Controller-->
+        <scene sceneID="bE9-nL-S6Q">
+            <objects>
+                <viewController storyboardIdentifier="PopupViewController" id="s3d-XQ-L0o" customClass="PopupViewController" sceneMemberID="viewController">
+                    <view key="view" id="FPn-Jl-2o1">
+                        <rect key="frame" x="0.0" y="0.0" width="373" height="83"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Aag-Ps-k4h">
+                                <rect key="frame" x="18" y="46" width="142" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Must say something!" id="44s-U6-slt">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                </viewController>
+                <customObject id="C6t-LT-Sw1" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="825.5" y="561.5"/>
+        </scene>
     </scenes>
 </document>

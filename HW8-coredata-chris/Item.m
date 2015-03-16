@@ -60,4 +60,27 @@
     }
 }
 
++(BOOL)deleteItem:(Item*)item fromMoc:(NSManagedObjectContext*)moc
+{
+    for(Image* img in item.images)
+    {
+        NSError* error;
+        BOOL ok = [[NSFileManager defaultManager] removeItemAtPath:img.imageURL error:&error];
+        if (!ok){
+            NSLog(@"delete image file %@ failed!", img.imageURL);
+        }
+    }
+    
+    [moc deleteObject:item];
+    
+    NSError* error = nil;
+    BOOL success = [moc save:&error];
+    if(!success)
+    {
+        NSLog(@"delete item %@ failed!", item.title);
+    }
+    return success;
+
+}
+
 @end

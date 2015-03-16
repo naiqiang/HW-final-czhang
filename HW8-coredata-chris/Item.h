@@ -20,7 +20,7 @@
 
 +(NSArray*)fetchAllItemsInContext:(NSManagedObjectContext*)moc;
 +(Item*)createItemInMoc:(NSManagedObjectContext*)moc withTitle:(NSString*)title withImages:(NSSet*)images withTags:(NSSet*)tags;
-
++(BOOL)deleteItem:(Item*)item fromMoc:(NSManagedObjectContext*)moc;
 @end
 
 @interface Item (CoreDataGeneratedAccessors)
