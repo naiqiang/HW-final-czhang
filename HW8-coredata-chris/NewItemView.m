@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 czhang. All rights reserved.
 //
 
-#import "NewInventoryView.h"
+#import "NewItemView.h"
 
 
-@implementation NewInventoryView
+@implementation NewItemView
 
 - (void)drawRect:(NSRect)dirtyRect {
     [super drawRect:dirtyRect];

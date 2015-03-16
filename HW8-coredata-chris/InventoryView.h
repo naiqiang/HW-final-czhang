@@ -7,13 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "Item.h"
 
-
-@interface CustomCellView : NSTableCellView
+@interface InventoryView : NSTableCellView
 
 @property (weak) IBOutlet NSTextField *label;
 @property (weak) IBOutlet NSImageView *imageView;
 @property (weak) IBOutlet NSButton *checkButton;
+
+@property (weak) Item* item;
 
 -(void)useNormalBackgroundColor;
 -(void)useAlternativeBackgroundColor;

@@ -2,7 +2,7 @@
 //  Tag.h
 //  HW8-coredata-chris
 //
-//  Created by czhang on 3/13/15.
+//  Created by czhang on 3/15/15.
 //  Copyright (c) 2015 czhang. All rights reserved.
 //
 
@@ -13,7 +13,7 @@
 
 @interface Tag : NSManagedObject
 
-@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *items;
 @end
 

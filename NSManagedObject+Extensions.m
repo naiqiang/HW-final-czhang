@@ -12,8 +12,7 @@
 
 +(NSString*)entityName
 {
-    return NSStringFromClass(self);
-//    @throw @"Overrie in subclass";
+    @throw @"Overrie in subclass";
 }
 
 +(instancetype)createInMoc:(NSManagedObjectContext *)moc

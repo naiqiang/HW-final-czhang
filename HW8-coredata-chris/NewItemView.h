@@ -9,9 +9,11 @@
 #import <Cocoa/Cocoa.h>
 
 IB_DESIGNABLE
-@interface NewInventoryView : NSTableCellView
+@interface NewItemView : NSTableCellView
 
 @property (weak) IBOutlet NSButton *addInvButton;
 @property (unsafe_unretained) IBOutlet NSTextView *invDescTextView;
+@property (weak) IBOutlet NSButton *addImageButton;
+@property (weak) IBOutlet NSButton *addTagButton;
 
 @end

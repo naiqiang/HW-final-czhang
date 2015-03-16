@@ -14,7 +14,7 @@
 @property (weak) IBOutlet NSTableView *tableView;
 
 @property NSManagedObjectContext* moc;
-@property (nonatomic, strong) NSArray* items;
+@property NSArray* items;
 
 @property (weak) IBOutlet NSTextField *addNewInvTextField;
 @property (weak) IBOutlet NSButton *addNewInvButton;

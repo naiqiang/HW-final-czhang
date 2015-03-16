@@ -7,15 +7,18 @@
 //
 
 #import "ViewController.h"
-#import "CustomCellView.h"
+#import "InventoryView.h"
 #import "ConfigurableCoreDataStack.h"
 #import "Item.h"
-#import "NewInventoryView.h"
+#import "NewItemView.h"
 #import "CoreDataStackConfiguration.h"
 #import "NSManagedObject+Extensions.h"
+#import "Image.h"
 
 @interface ViewController()
-
+@property NSString* title;
+@property NSMutableSet* pendingImages;
+@property NSMutableSet* pendingTags;
 @end
 
 @implementation ViewController
@@ -27,12 +30,13 @@
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-    
+
     // now setup the core data stack
+    
     CoreDataStackConfiguration* config = [CoreDataStackConfiguration new];
     config.storeType = NSSQLiteStoreType;
-    config.modelName = @"InventoryModel";// note: match the xcdatamodel file
-    config.appIdentifier = @"czhang.HW8.coredata.2";
+    config.modelName = @"InventoryModel";
+    config.appIdentifier = @"czhang.HW8.coredata.7";
     config.dataFileNameWithExtension = @"store.sqlite";
     config.searchPathDirectory = NSApplicationSupportDirectory;
     
@@ -40,8 +44,15 @@
     
     self.moc = stack.managedObjectContext;
     
-    // now retrieve all items from data store
-    self.items = [self fetchItems];
+    //
+    // retrieve all the items from data store
+    //
+    
+    self.items = [Item fetchAllItemsInContext:self.moc];
+    
+    self.title = nil;
+    self.pendingImages = [NSMutableSet new];
+    self.pendingTags = [NSMutableSet new];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
@@ -50,40 +61,10 @@
     // Update the view, if already loaded.
 }
 
-//-(NSArray*)doit
-//{
-//    //@@ insert item
-//    Item* item = [Item createInMoc:self.moc];
-//    
-//    item.title = @"Used car - 98 civic, in great shape. needs repair. bumps. 120k miles. only $1500.";
-//    
-//    NSLog(@"%@", item);
-//    
-//    NSError* error = nil;
-//    BOOL success = [self.moc save:&error];
-//    if(!success)
-//    {
-//        [[NSApplication sharedApplication] presentError:error];
-//    }
-//    
-//    //@@ fetch item
-//    NSFetchRequest* req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-//    NSError* error2 = nil;
-//    NSArray* allItems = [self.moc executeFetchRequest:req error:&error2];
-//    
-//    NSLog(@"%@", allItems);
-//    for(Item* i in allItems){
-//        NSLog(@"%@", i.title);
-//    }
-//    return allItems;
-//}
 
--(BOOL)addItem:(NSString*)text
+-(BOOL)deleteItem:(Item*)item
 {
-    NSLog(@"adding %@", text);
-    
-    Item* item = [Item createInMoc:self.moc];
-    item.title = text;
+    [self.moc deleteObject:item];
     
     NSError* error = nil;
     BOOL success = [self.moc save:&error];
@@ -94,42 +75,10 @@
     return success;
 }
 
--(NSArray*)fetchItems
-{
-    //@@ fetch item
-    NSFetchRequest* req = [NSFetchRequest fetchRequestWithEntityName:@"Item"];
-    NSError* error = nil;
-    NSArray* allItems = [self.moc executeFetchRequest:req error:&error];
-    
-    NSLog(@"fetched %ld items", allItems.count);
-    for(Item* i in allItems){
-        NSLog(@"title=%@", i.title);
-    }
-    
-    return allItems;
-}
-
--(BOOL)deleteItem:(NSString*)text
-{
-    for(Item* item in self.items)
-    {
-        if ( [item.title isEqualToString:text] )
-        {
-            [self.moc deleteObject:item];
-        
-            NSError* error = nil;
-            BOOL success = [self.moc save:&error];
-            if(!success)
-            {
-                [[NSApplication sharedApplication] presentError:error];
-            }
-            return success;
-        }
-    }
-    return NO;
-}
 -(NSInteger)numberOfRowsInTableView:(NSTableView *)tableView
 {
+    // add an extra row to the table
+    // that's the view to add new items
     return self.items.count + 1;
 }
 
@@ -138,66 +87,151 @@
 {
     if ( row >= self.items.count)
     {
+        // last row
         return 75 + 2*10;
     }
     else
     {
+        // regular row
         return 150 + 10*2;
     }
 }
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    NSLog(@"%@",[NSString stringWithFormat:@"%ldl",(long)row ]);
+    NSLog(@"view for row %@",[NSString stringWithFormat:@"%ldl",(long)row ]);
     
     if ( row >= self.items.count)
     {
         // the last one
-        NewInventoryView* view = [self.tableView makeViewWithIdentifier:@"NewInventoryView" owner:self];
-        view.addInvButton.image = [NSImage imageNamed:@"list-add.png"];
+        NewItemView* view = [self.tableView makeViewWithIdentifier:@"NewInventoryView" owner:self];
         
+        view.addInvButton.image = [NSImage imageNamed:@"yes.png"];
+        view.addImageButton.image = [NSImage imageNamed:@"list-add.png"];
+        view.addTagButton.image = [NSImage imageNamed:@"tag.png"];
+        
+        CGFloat x = 450;
+        CGFloat y= 10;
+        CGFloat wh = 25;
+        CGFloat div = 5;
+        
+        [self addImages:self.pendingImages toView:view startingAt:NSMakeRect(x, y, wh, wh) withHorizontalDiv:div];
+
         return view;
     }
     else
     {
-        CustomCellView* view = [self.tableView makeViewWithIdentifier:@"InventoryView" owner:self];
-    
+        InventoryView* view = [self.tableView makeViewWithIdentifier:@"InventoryView" owner:self];
+        view.checkButton.image = [NSImage imageNamed:@"del.png"];
+        
         ( row %2 ==0 ) ? [view useNormalBackgroundColor] : [view useAlternativeBackgroundColor];
         
         Item* item = (Item*)[self.items objectAtIndex:row];
-        view.label.stringValue = item.title;
+        view.item = item;
+        view.label.stringValue = [NSString stringWithFormat:@"created at %@\n\n%@", item.dateCreated, item.title ];
         
-        view.checkButton.image = [NSImage imageNamed:@"checkcross.png"];
-    
-//        [view.imageView setImage:[NSImage imageNamed:@"background.png"]];
-  
         CGFloat x = 20+300+10;//view.label.bounds.origin.x + view.label.bounds.size.width+10;
         CGFloat y= 10;
-        NSImageView* invImgView = [[NSImageView alloc] initWithFrame:CGRectMake(x, y, 150, 150)];
-        [invImgView setImage: [NSImage imageNamed:@"background.png"]];
+        CGFloat wh = 150;
+        CGFloat div = 10;
         
-        [view addSubview:invImgView];
+        [self addImages:item.images toView:view startingAt:NSMakeRect(x, y, wh, wh) withHorizontalDiv:div];
         
         return view;
     }
 }
 
+-(void)addImages:(NSSet*)images toView:(NSView*)view startingAt:(NSRect)firstRect withHorizontalDiv:(CGFloat)div
+{
+    CGFloat x = firstRect.origin.x;
+    CGFloat y = firstRect.origin.y;
+    CGFloat w = firstRect.size.width;
+    CGFloat h = firstRect.size.height;
+
+    for(Image* img in images)
+    {
+        NSImageView* invImgView = [[NSImageView alloc] initWithFrame:CGRectMake(x, y, w, h)];
+        //NSImage* loadImage = [NSImage imageNamed:@"background.png"];
+        NSImage* loadImage = [[NSImage alloc] initWithContentsOfURL:[[NSURL alloc] initFileURLWithPath:img.imageURL]];
+        NSLog(@"add image %@", img.imageURL);
+        
+        [invImgView setImage: loadImage];
+        
+        [view addSubview:invImgView];
+        
+        x = x + w + div;
+    }
+}
 
 - (IBAction)onClickAddNewInv:(id)sender {
-    NewInventoryView* view = (NewInventoryView*)[sender superview];
+    NewItemView* view = (NewItemView*)[sender superview];
     NSLog(@"add new inventory: %@", view.invDescTextView.string);
     
-    [self addItem:view.invDescTextView.string];
-    self.items = [self fetchItems];
+    NSString* title = view.invDescTextView.string;
+    Item* newItem = [Item createItemInMoc:self.moc withTitle:title withImages:self.pendingImages withTags:self.pendingTags];
+    if (newItem == nil ){
+        NSLog(@"***** add new item failed! *****");
+    }
+    else
+    {
+        self.items = [Item fetchAllItemsInContext:self.moc];
+        [self.tableView reloadData];
+    }
+    self.pendingImages = [NSMutableSet new];
+    self.pendingTags = [NSMutableSet new];
+}
+
+- (IBAction)onClickAddImageButton:(id)sender {
+    NSLog(@"onClickAddImageButton");
+    
+    NSOpenPanel *op = [NSOpenPanel openPanel];
+    op.directoryURL = [NSURL fileURLWithPath:[@"~/Downloads" stringByExpandingTildeInPath]];
+    
+    [op beginWithCompletionHandler:^(NSInteger returnCode)
+     {
+         // execute after user makes choice
+         
+         // for each url
+         for(NSURL* url in op.URLs)
+         {
+             NSLog(@"user got: %@", url.relativePath);
+             
+             // make core data Image entiry
+             Image* image = [Image createInMoc:self.moc];
+             
+             // generate the target URL
+             NSString* fileNameWithExtension = url.lastPathComponent;
+             //NSString* fileName = [fileNameWithExtension stringByDeletingPathExtension];
+             NSString* extension = fileNameWithExtension.pathExtension;
+             NSURL* appDirUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] firstObject];
+             NSString *uuid = [[NSUUID UUID] UUIDString];
+             NSURL* targetURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@.%@",appDirUrl.absoluteString, @"HW-final-coredata", uuid, extension]];
+             
+             NSLog(@"copy to %@", targetURL.relativePath);
+             
+             // copy image to app's location
+             [[NSFileManager defaultManager] copyItemAtURL:url toURL:targetURL error:nil];
+
+             image.imageURL = targetURL.relativePath;
+             [self.pendingImages addObject:image];
+         }
+     }];
+    
+    self.items = [Item fetchAllItemsInContext:self.moc];
     [self.tableView reloadData];
 }
 
-- (IBAction)onClickCheckButton:(id)sender {
-    CustomCellView* view = (CustomCellView*)[sender superview];
-    NSLog(@"delete inventory: %@", view.label.stringValue);
+- (IBAction)onClickAddtagButton:(id)sender {
+    NSLog(@"onClickAddtagButton");
+}
 
-    [self deleteItem: view.label.stringValue];
-    self.items = [self fetchItems];
+- (IBAction)onClickCheckButton:(id)sender {
+    InventoryView* view = (InventoryView*)[sender superview];
+    NSLog(@"delete inventory: %@", view.item.title);
+
+    [self deleteItem: view.item];
+    
+    self.items = [Item fetchAllItemsInContext:self.moc];
     [self.tableView reloadData];
 }
 

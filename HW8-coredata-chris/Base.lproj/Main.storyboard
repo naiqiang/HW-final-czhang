@@ -696,7 +696,7 @@
                                                     </textFieldCell>
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
-                                                        <customView identifier="InventoryView" id="uP8-gl-Jgd" userLabel="Inventory View" customClass="CustomCellView">
+                                                        <customView identifier="InventoryView" id="uP8-gl-Jgd" userLabel="Inventory View" customClass="InventoryView">
                                                             <rect key="frame" x="1" y="1" width="730" height="224"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <subviews>
@@ -738,17 +738,17 @@
                                                                 <outlet property="label" destination="1dJ-34-K58" id="mHD-fI-NnN"/>
                                                             </connections>
                                                         </customView>
-                                                        <customView identifier="NewInventoryView" id="u0S-CV-59B" userLabel="New Inventory View" customClass="NewInventoryView">
+                                                        <customView identifier="NewInventoryView" id="u0S-CV-59B" userLabel="New Inventory View" customClass="NewItemView">
                                                             <rect key="frame" x="1" y="261" width="730" height="209"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <subviews>
-                                                                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v5x-nu-cEn">
+                                                                <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v5x-nu-cEn" userLabel="Add button">
                                                                     <rect key="frame" x="628" y="91" width="99" height="140"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="50" id="ewu-lV-wLo"/>
                                                                         <constraint firstAttribute="width" constant="50" id="fRK-TI-QiI"/>
                                                                     </constraints>
-                                                                    <buttonCell key="cell" type="square" title="ADD" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="1IW-VY-V3F">
+                                                                    <buttonCell key="cell" type="square" title="Add" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="1IW-VY-V3F">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -788,6 +788,26 @@
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
                                                                 </scrollView>
+                                                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dA0-d3-6K7" userLabel="Image Button">
+                                                                    <rect key="frame" x="328" y="178" width="70" height="21"/>
+                                                                    <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="cUg-Hi-vYn">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="onClickAddImageButton:" target="XfG-lQ-9wD" id="fnY-qE-jQd"/>
+                                                                    </connections>
+                                                                </button>
+                                                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zJ-aX-NoJ" userLabel="Tag Button">
+                                                                    <rect key="frame" x="328" y="145" width="70" height="21"/>
+                                                                    <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="X9i-es-wVN">
+                                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                        <font key="font" metaFont="system"/>
+                                                                    </buttonCell>
+                                                                    <connections>
+                                                                        <action selector="onClickAddtagButton:" target="XfG-lQ-9wD" id="jvH-TS-Jzo"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="8aD-UY-1LL" firstAttribute="leading" secondItem="u0S-CV-59B" secondAttribute="leading" constant="20" id="12G-UQ-ABj"/>
@@ -796,7 +816,9 @@
                                                                 <constraint firstAttribute="trailing" secondItem="v5x-nu-cEn" secondAttribute="trailing" constant="20" id="dIH-RM-EXK"/>
                                                             </constraints>
                                                             <connections>
+                                                                <outlet property="addImageButton" destination="dA0-d3-6K7" id="VDj-P1-anV"/>
                                                                 <outlet property="addInvButton" destination="v5x-nu-cEn" id="z1z-hg-EGG"/>
+                                                                <outlet property="addTagButton" destination="6zJ-aX-NoJ" id="dGG-m5-i8H"/>
                                                                 <outlet property="invDescTextView" destination="8th-M5-uyt" id="cXr-0Z-jgw"/>
                                                             </connections>
                                                         </customView>

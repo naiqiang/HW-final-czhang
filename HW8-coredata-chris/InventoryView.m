@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 czhang. All rights reserved.
 //
 
-#import "CustomCellView.h"
+#import "InventoryView.h"
 
 
-@interface CustomCellView()
+@interface InventoryView()
 @property NSColor* backgroundColor;
 @end
 
-@implementation CustomCellView
+@implementation InventoryView
 
 
 -(void)useNormalBackgroundColor
