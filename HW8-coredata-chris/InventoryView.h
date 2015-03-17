@@ -12,8 +12,9 @@
 @interface InventoryView : NSTableCellView
 
 @property (weak) IBOutlet NSTextField *label;
-@property (weak) IBOutlet NSImageView *imageView;
+//@property (weak) IBOutlet NSImageView *imageView;
 @property (weak) IBOutlet NSButton *checkButton;
+@property (weak) IBOutlet NSView *imagePanelView;
 
 @property (weak) Item* item;
 

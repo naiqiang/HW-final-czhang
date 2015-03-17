@@ -15,5 +15,6 @@ IB_DESIGNABLE
 @property (unsafe_unretained) IBOutlet NSTextView *invDescTextView;
 @property (weak) IBOutlet NSButton *addImageButton;
 @property (weak) IBOutlet NSButton *addTagButton;
+@property (weak) IBOutlet NSView *imagePanelView;
 
 @end

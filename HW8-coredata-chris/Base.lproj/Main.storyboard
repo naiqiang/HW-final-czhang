@@ -668,12 +668,12 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="940" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView ambiguous="YES" misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="226" horizontalPageScroll="10" verticalLineScroll="226" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mC-Dy-gWn">
+                            <scrollView misplaced="YES" autohidesScrollers="YES" horizontalLineScroll="226" horizontalPageScroll="10" verticalLineScroll="226" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1mC-Dy-gWn">
                                 <rect key="frame" x="20" y="34" width="735" height="545"/>
-                                <clipView key="contentView" ambiguous="YES" misplaced="YES" id="B1l-Pj-5Te">
+                                <clipView key="contentView" misplaced="YES" id="B1l-Pj-5Te">
                                     <rect key="frame" x="1" y="0.0" width="238" height="134"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -712,6 +712,13 @@
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
                                                                 </textField>
+                                                                <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r0f-9m-ms2">
+                                                                    <rect key="frame" x="317" y="34" width="163" height="170"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="500" id="53k-lb-du5"/>
+                                                                        <constraint firstAttribute="height" constant="150" id="h8x-mi-1aq"/>
+                                                                    </constraints>
+                                                                </customView>
                                                                 <button misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kRt-5Q-uV6">
                                                                     <rect key="frame" x="640" y="194" width="70" height="21"/>
                                                                     <constraints>
@@ -730,11 +737,14 @@
                                                             <constraints>
                                                                 <constraint firstItem="1dJ-34-K58" firstAttribute="leading" secondItem="uP8-gl-Jgd" secondAttribute="leading" constant="20" id="CvX-oZ-q99"/>
                                                                 <constraint firstAttribute="trailing" secondItem="kRt-5Q-uV6" secondAttribute="trailing" constant="20" id="IAw-98-AaS"/>
+                                                                <constraint firstItem="r0f-9m-ms2" firstAttribute="top" secondItem="uP8-gl-Jgd" secondAttribute="top" constant="10" id="PFp-U9-wcU"/>
+                                                                <constraint firstItem="r0f-9m-ms2" firstAttribute="leading" secondItem="1dJ-34-K58" secondAttribute="trailing" constant="10" id="TEz-e8-kkq"/>
                                                                 <constraint firstItem="1dJ-34-K58" firstAttribute="top" secondItem="uP8-gl-Jgd" secondAttribute="top" constant="10" id="YNb-hr-AdY"/>
                                                                 <constraint firstItem="kRt-5Q-uV6" firstAttribute="top" secondItem="uP8-gl-Jgd" secondAttribute="top" constant="10" id="xN6-M1-2OU"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="checkButton" destination="kRt-5Q-uV6" id="g0W-el-ZHL"/>
+                                                                <outlet property="imagePanelView" destination="r0f-9m-ms2" id="wKa-zc-37z"/>
                                                                 <outlet property="label" destination="1dJ-34-K58" id="mHD-fI-NnN"/>
                                                             </connections>
                                                         </customView>
@@ -788,9 +798,12 @@
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                     </scroller>
                                                                 </scrollView>
-                                                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dA0-d3-6K7" userLabel="Image Button">
-                                                                    <rect key="frame" x="328" y="178" width="70" height="21"/>
-                                                                    <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="cUg-Hi-vYn">
+                                                                <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dA0-d3-6K7" userLabel="Image Button">
+                                                                    <rect key="frame" x="322" y="171" width="82" height="32"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="50" id="lBH-37-YqZ"/>
+                                                                    </constraints>
+                                                                    <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cUg-Hi-vYn">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -798,9 +811,12 @@
                                                                         <action selector="onClickAddImageButton:" target="XfG-lQ-9wD" id="fnY-qE-jQd"/>
                                                                     </connections>
                                                                 </button>
-                                                                <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zJ-aX-NoJ" userLabel="Tag Button">
-                                                                    <rect key="frame" x="328" y="145" width="70" height="21"/>
-                                                                    <buttonCell key="cell" type="bevel" title="Button" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="X9i-es-wVN">
+                                                                <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6zJ-aX-NoJ" userLabel="Tag Button">
+                                                                    <rect key="frame" x="328" y="145" width="70" height="32"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" constant="50" id="Bdr-8r-0S5"/>
+                                                                    </constraints>
+                                                                    <buttonCell key="cell" type="push" title="Button" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="X9i-es-wVN">
                                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                         <font key="font" metaFont="system"/>
                                                                     </buttonCell>
@@ -808,17 +824,30 @@
                                                                         <action selector="onClickAddtagButton:" target="XfG-lQ-9wD" id="jvH-TS-Jzo"/>
                                                                     </connections>
                                                                 </button>
+                                                                <customView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xfk-vR-7zF">
+                                                                    <rect key="frame" x="427" y="103" width="163" height="96"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="100" id="RjV-W1-1IX"/>
+                                                                        <constraint firstAttribute="width" constant="150" id="dI5-RC-qkt"/>
+                                                                    </constraints>
+                                                                </customView>
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="8aD-UY-1LL" firstAttribute="leading" secondItem="u0S-CV-59B" secondAttribute="leading" constant="20" id="12G-UQ-ABj"/>
                                                                 <constraint firstItem="v5x-nu-cEn" firstAttribute="top" secondItem="u0S-CV-59B" secondAttribute="top" constant="10" id="CJe-hS-XlP"/>
+                                                                <constraint firstItem="xfk-vR-7zF" firstAttribute="top" secondItem="u0S-CV-59B" secondAttribute="top" constant="10" id="S08-lt-msb"/>
+                                                                <constraint firstItem="6zJ-aX-NoJ" firstAttribute="leading" secondItem="8aD-UY-1LL" secondAttribute="trailing" constant="10" id="VLS-dM-Mfy"/>
+                                                                <constraint firstItem="dA0-d3-6K7" firstAttribute="leading" secondItem="8aD-UY-1LL" secondAttribute="trailing" constant="10" id="ZzB-aW-Ank"/>
                                                                 <constraint firstItem="8aD-UY-1LL" firstAttribute="top" secondItem="u0S-CV-59B" secondAttribute="top" constant="10" id="cKr-AI-HiJ"/>
                                                                 <constraint firstAttribute="trailing" secondItem="v5x-nu-cEn" secondAttribute="trailing" constant="20" id="dIH-RM-EXK"/>
+                                                                <constraint firstItem="dA0-d3-6K7" firstAttribute="top" secondItem="u0S-CV-59B" secondAttribute="top" constant="10" id="qGm-GU-DkQ"/>
+                                                                <constraint firstItem="xfk-vR-7zF" firstAttribute="leading" secondItem="6zJ-aX-NoJ" secondAttribute="trailing" constant="10" id="zKI-oe-Urb"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="addImageButton" destination="dA0-d3-6K7" id="VDj-P1-anV"/>
                                                                 <outlet property="addInvButton" destination="v5x-nu-cEn" id="z1z-hg-EGG"/>
                                                                 <outlet property="addTagButton" destination="6zJ-aX-NoJ" id="dGG-m5-i8H"/>
+                                                                <outlet property="imagePanelView" destination="xfk-vR-7zF" id="rrt-JR-6QA"/>
                                                                 <outlet property="invDescTextView" destination="8th-M5-uyt" id="cXr-0Z-jgw"/>
                                                             </connections>
                                                         </customView>
@@ -829,6 +858,9 @@
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="900" id="qXu-W2-sNn"/>
+                                </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="fpu-x4-gd7">
                                     <rect key="frame" x="1" y="119" width="223" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
@@ -840,6 +872,7 @@
                             </scrollView>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="bottom" secondItem="1mC-Dy-gWn" secondAttribute="bottom" constant="34" id="63C-Oc-C8I"/>
                             <constraint firstItem="1mC-Dy-gWn" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="KuE-b4-eEr"/>
                             <constraint firstItem="1mC-Dy-gWn" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="Y96-cL-M5Y"/>
                             <constraint firstAttribute="trailing" secondItem="1mC-Dy-gWn" secondAttribute="trailing" constant="20" id="mHf-mQ-T8B"/>

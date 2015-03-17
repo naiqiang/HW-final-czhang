@@ -30,11 +30,11 @@
     NSError* error = nil;
     NSArray* allItems = [moc executeFetchRequest:req error:&error];
         
-    NSLog(@"fetched %ld items", allItems.count);
-    for(Item* i in allItems){
-        NSLog(@"title=%@ created=%@ img#=%ld tag#=%ld", i.title, i.dateCreated, i.images.count, i.tags.count);
-    }
-        
+//    NSLog(@"fetched %ld items", allItems.count);
+//    for(Item* i in allItems){
+//        NSLog(@"title=%@ created=%@ img#=%ld tag#=%ld", i.title, i.dateCreated, i.images.count, i.tags.count);
+//    }
+    
     return allItems;
 }
 

@@ -97,12 +97,12 @@
         view.addImageButton.image = [NSImage imageNamed:@"list-add.png"];
         view.addTagButton.image = [NSImage imageNamed:@"tag.png"];
         
-        CGFloat x = 450;
-        CGFloat y= 10;
-        CGFloat wh = 25;
+        CGFloat wh = 50;
         CGFloat div = 5;
+        CGFloat x = div;
+        CGFloat y= div + wh;
         
-        [self addImages:self.pendingImages toView:view startingAt:NSMakeRect(x, y, wh, wh) withHorizontalDiv:div];
+        [self addImages:self.pendingImages toView:view.imagePanelView startingAt:NSMakeRect(x, y, wh, wh) withHorizontalDiv:div];
 //        view.invDescTextView.string = self.pendingTitle;
 
         return view;
@@ -118,12 +118,13 @@
         view.item = item;
         view.label.stringValue = [NSString stringWithFormat:@"created at %@\n\n%@", item.dateCreated, item.title ];
         
-        CGFloat x = 20+300+10;//view.label.bounds.origin.x + view.label.bounds.size.width+10;
-        CGFloat y= 10;
         CGFloat wh = 150;
         CGFloat div = 10;
+        CGFloat x = div;
+        NSLog(@"h=%f", view.imagePanelView.bounds.size.height);
+        CGFloat y = 170 - div - wh ;
         
-        [self addImages:item.images toView:view startingAt:NSMakeRect(x, y, wh, wh) withHorizontalDiv:div];
+        [self addImages:item.images toView:view.imagePanelView startingAt:NSMakeRect(x, y, wh, wh) withHorizontalDiv:div];
         
         return view;
     }
@@ -131,6 +132,11 @@
 
 -(void)addImages:(NSSet*)images toView:(NSView*)view startingAt:(NSRect)firstRect withHorizontalDiv:(CGFloat)div
 {
+    while(view.subviews.count>0)
+    {
+        [((NSView*)[view.subviews objectAtIndex:view.subviews.count-1]) removeFromSuperview];
+    }
+    
     CGFloat x = firstRect.origin.x;
     CGFloat y = firstRect.origin.y;
     CGFloat w = firstRect.size.width;
@@ -139,12 +145,9 @@
     for(Image* img in images)
     {
         NSImageView* invImgView = [[NSImageView alloc] initWithFrame:CGRectMake(x, y, w, h)];
-        //NSImage* loadImage = [NSImage imageNamed:@"background.png"];
         NSImage* loadImage = [[NSImage alloc] initWithContentsOfURL:[[NSURL alloc] initFileURLWithPath:img.imageURL]];
-        NSLog(@"add image %@", img.imageURL);
         
         [invImgView setImage: loadImage];
-        
         [view addSubview:invImgView];
         
         x = x + w + div;
@@ -171,20 +174,20 @@
         return;
     }
 
-    NSString* title = view.invDescTextView.string;
+    NSString* title = [[NSString alloc] initWithString: view.invDescTextView.string];
     Item* newItem = [Item createItemInMoc:self.moc withTitle:title withImages:self.pendingImages withTags:self.pendingTags];
     if (newItem == nil ){
         NSLog(@"***** add new item failed! *****");
     }
-    else
-    {
-        self.items = [Item fetchAllItemsInContext:self.moc];
-        [self.tableView reloadData];
-    }
+
+    view.invDescTextView.string = @"";
+    [self.pendingImages removeAllObjects];
+    [self.pendingTags removeAllObjects];
+    
+    self.items = [Item fetchAllItemsInContext:self.moc];
+    [self.tableView reloadData];
     
 //    self.pendingTitle = @"";
-    self.pendingImages = [NSMutableSet new];
-    self.pendingTags = [NSMutableSet new];
 }
 
 - (IBAction)onClickAddImageButton:(id)sender {
@@ -214,7 +217,7 @@
              NSString *uuid = [[NSUUID UUID] UUIDString];
              NSURL* targetURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@.%@",appDirUrl.absoluteString, @"HW-final-coredata", uuid, extension]];
              
-             NSLog(@"copy to %@", targetURL.relativePath);
+//             NSLog(@"copy to %@", targetURL.relativePath);
              
              // copy image to app's location
              [[NSFileManager defaultManager] copyItemAtURL:url toURL:targetURL error:nil];
@@ -222,10 +225,10 @@
              image.imageURL = targetURL.relativePath;
              [self.pendingImages addObject:image];
          }
+         
+         [self.tableView reloadData];
+
      }];
-    
-    self.items = [Item fetchAllItemsInContext:self.moc];
-    [self.tableView reloadData];
 }
 
 - (IBAction)onClickAddtagButton:(id)sender {
