@@ -25,12 +25,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     // Do any additional setup after loading the view.
     
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
-
+    
     // now setup the core data stack
     
     CoreDataStackConfiguration* config = [CoreDataStackConfiguration new];
@@ -41,23 +41,23 @@
     config.searchPathDirectory = NSApplicationSupportDirectory;
     
     ConfigurableCoreDataStack* stack = [[ConfigurableCoreDataStack alloc] initWithConfiguration:config];
+//    [stack removeCoreDataFilesFromDisk];
     
     self.moc = stack.managedObjectContext;
     
     //
     // retrieve all the items from data store
     //
-//    [stack removeCoreDataFilesFromDisk];    
     self.items = [Item fetchAllItemsInContext:self.moc];
     
-//    self.pendingTitle = @"";
+    //    self.pendingTitle = @"";
     self.pendingImages = [NSMutableSet new];
     self.pendingTags = [NSMutableSet new];
 }
 
 - (void)setRepresentedObject:(id)representedObject {
     [super setRepresentedObject:representedObject];
-
+    
     // Update the view, if already loaded.
 }
 
@@ -86,8 +86,6 @@
 
 -(NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
 {
-    NSLog(@"view for row %@",[NSString stringWithFormat:@"%ldl",(long)row ]);
-    
     if ( row >= self.items.count)
     {
         // the last one
@@ -103,8 +101,8 @@
         CGFloat y= div + wh;
         
         [self addImages:self.pendingImages toView:view.imagePanelView startingAt:NSMakeRect(x, y, wh, wh) withHorizontalDiv:div];
-//        view.invDescTextView.string = self.pendingTitle;
-
+        //        view.invDescTextView.string = self.pendingTitle;
+        
         return view;
     }
     else
@@ -121,7 +119,6 @@
         CGFloat wh = 150;
         CGFloat div = 10;
         CGFloat x = div;
-        NSLog(@"h=%f", view.imagePanelView.bounds.size.height);
         CGFloat y = 170 - div - wh ;
         
         [self addImages:item.images toView:view.imagePanelView startingAt:NSMakeRect(x, y, wh, wh) withHorizontalDiv:div];
@@ -141,7 +138,7 @@
     CGFloat y = firstRect.origin.y;
     CGFloat w = firstRect.size.width;
     CGFloat h = firstRect.size.height;
-
+    
     for(Image* img in images)
     {
         NSImageView* invImgView = [[NSImageView alloc] initWithFrame:CGRectMake(x, y, w, h)];
@@ -156,7 +153,6 @@
 
 - (IBAction)onClickAddNewInv:(id)sender {
     NewItemView* view = (NewItemView*)[sender superview];
-    NSLog(@"add new inventory: %@", view.invDescTextView.string);
     
     if ([view.invDescTextView.string isEqualToString:@""])
     {
@@ -173,13 +169,15 @@
         
         return;
     }
+    
+    NSLog(@"add new inventory: %@", view.invDescTextView.string);
 
     NSString* title = [[NSString alloc] initWithString: view.invDescTextView.string];
     Item* newItem = [Item createItemInMoc:self.moc withTitle:title withImages:self.pendingImages withTags:self.pendingTags];
     if (newItem == nil ){
         NSLog(@"***** add new item failed! *****");
     }
-
+    
     view.invDescTextView.string = @"";
     [self.pendingImages removeAllObjects];
     [self.pendingTags removeAllObjects];
@@ -187,7 +185,7 @@
     self.items = [Item fetchAllItemsInContext:self.moc];
     [self.tableView reloadData];
     
-//    self.pendingTitle = @"";
+    //    self.pendingTitle = @"";
 }
 
 - (IBAction)onClickAddImageButton:(id)sender {
@@ -217,17 +215,17 @@
              NSString *uuid = [[NSUUID UUID] UUIDString];
              NSURL* targetURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@.%@",appDirUrl.absoluteString, @"HW-final-coredata", uuid, extension]];
              
-//             NSLog(@"copy to %@", targetURL.relativePath);
+             //             NSLog(@"copy to %@", targetURL.relativePath);
              
              // copy image to app's location
              [[NSFileManager defaultManager] copyItemAtURL:url toURL:targetURL error:nil];
-
+             
              image.imageURL = targetURL.relativePath;
              [self.pendingImages addObject:image];
          }
          
          [self.tableView reloadData];
-
+         
      }];
 }
 
@@ -238,7 +236,7 @@
 - (IBAction)onClickCheckButton:(id)sender {
     InventoryView* view = (InventoryView*)[sender superview];
     NSLog(@"delete inventory: %@", view.item.title);
-
+    
     [Item deleteItem:view.item fromMoc:self.moc];
     
     self.items = [Item fetchAllItemsInContext:self.moc];
