@@ -14,11 +14,14 @@
 #import "CoreDataStackConfiguration.h"
 #import "NSManagedObject+Extensions.h"
 #import "Image.h"
+#import "Tag.h"
 
 @interface ViewController()
-//@property NSString* pendingTitle;
+
 @property NSMutableSet* pendingImages;
 @property NSMutableSet* pendingTags;
+@property NSArray* avialableTags;
+
 @end
 
 @implementation ViewController
@@ -50,7 +53,8 @@
     //
     self.items = [Item fetchAllItemsInContext:self.moc];
     
-    //    self.pendingTitle = @"";
+    self.avialableTags = [Tag fetchAllTagsInContext:self.moc];
+    
     self.pendingImages = [NSMutableSet new];
     self.pendingTags = [NSMutableSet new];
 }
@@ -75,7 +79,7 @@
     if ( row >= self.items.count)
     {
         // last row
-        return 75 + 2*10;
+        return 200 + 2*10;
     }
     else
     {
@@ -93,7 +97,7 @@
         
         view.addInvButton.image = [NSImage imageNamed:@"yes.png"];
         view.addImageButton.image = [NSImage imageNamed:@"list-add.png"];
-        view.addTagButton.image = [NSImage imageNamed:@"tag.png"];
+        view.clrEntryButton.image = [NSImage imageNamed:@"clr.png"];
         
         CGFloat wh = 50;
         CGFloat div = 5;
@@ -101,7 +105,6 @@
         CGFloat y= div + wh;
         
         [self addImages:self.pendingImages toView:view.imagePanelView startingAt:NSMakeRect(x, y, wh, wh) withHorizontalDiv:div];
-        //        view.invDescTextView.string = self.pendingTitle;
         
         return view;
     }
@@ -114,7 +117,12 @@
         
         Item* item = (Item*)[self.items objectAtIndex:row];
         view.item = item;
-        view.label.stringValue = [NSString stringWithFormat:@"created at %@\n\n%@", item.dateCreated, item.title ];
+        NSString* tagString = [NSString new];
+        for(Tag* tag in item.tags)
+        {
+            tagString = [[tagString stringByAppendingString:tag.name] stringByAppendingString:@" "];
+        }
+        view.label.stringValue = [NSString stringWithFormat:@"created at %@\n\n%@\n\nTAGS:%@", item.dateCreated, item.title, tagString ];
         
         CGFloat wh = 150;
         CGFloat div = 10;
@@ -163,7 +171,7 @@
         // get the VC by its id
         NSViewController* vc = [sb instantiateControllerWithIdentifier:@"PopupViewController"];
         [self presentViewController:vc  asPopoverRelativeToRect:view.invDescTextView.bounds
-                             ofView:view
+                             ofView:view.invDescTextView
                       preferredEdge:NSMaxYEdge
                            behavior:NSPopoverBehaviorTransient];
         
@@ -173,19 +181,21 @@
     NSLog(@"add new inventory: %@", view.invDescTextView.string);
 
     NSString* title = [[NSString alloc] initWithString: view.invDescTextView.string];
+    NSArray* tagNames = [view.addTagTextView.string componentsSeparatedByString:@"," ];
+    NSArray* newTags = [Tag createNewTagsInContext:self.moc withAvailableTags:self.avialableTags fromStringArray:tagNames];
+    [self.pendingTags addObjectsFromArray:newTags];
     Item* newItem = [Item createItemInMoc:self.moc withTitle:title withImages:self.pendingImages withTags:self.pendingTags];
     if (newItem == nil ){
         NSLog(@"***** add new item failed! *****");
     }
     
     view.invDescTextView.string = @"";
+    view.addTagTextView.string = @"";
     [self.pendingImages removeAllObjects];
     [self.pendingTags removeAllObjects];
     
     self.items = [Item fetchAllItemsInContext:self.moc];
     [self.tableView reloadData];
-    
-    //    self.pendingTitle = @"";
 }
 
 - (IBAction)onClickAddImageButton:(id)sender {
@@ -229,8 +239,16 @@
      }];
 }
 
-- (IBAction)onClickAddtagButton:(id)sender {
-    NSLog(@"onClickAddtagButton");
+- (IBAction)onClickClearButton:(id)sender {
+    NewItemView* view = (NewItemView*)[sender superview];
+    
+    view.invDescTextView.string = @"";
+    view.addTagTextView.string = @"";
+    [self.pendingImages removeAllObjects];
+    [self.pendingTags removeAllObjects];
+    
+    self.items = [Item fetchAllItemsInContext:self.moc];
+    [self.tableView reloadData];
 }
 
 - (IBAction)onClickCheckButton:(id)sender {

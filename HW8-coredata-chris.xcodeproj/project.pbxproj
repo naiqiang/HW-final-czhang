@@ -28,6 +28,7 @@
 		E1E638731AB67C2900C4C177 /* yes.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E638711AB67C2900C4C177 /* yes.png */; };
 		E1E638751AB69A8000C4C177 /* del.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E638741AB69A8000C4C177 /* del.png */; };
 		E1E638781AB6B40600C4C177 /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E638771AB6B40600C4C177 /* PopupViewController.m */; };
+		E1E6387A1ABBF7A100C4C177 /* clr.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E638791ABBF7A100C4C177 /* clr.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		E1E638741AB69A8000C4C177 /* del.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = del.png; sourceTree = "<group>"; };
 		E1E638761AB6B40600C4C177 /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupViewController.h; sourceTree = "<group>"; };
 		E1E638771AB6B40600C4C177 /* PopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupViewController.m; sourceTree = "<group>"; };
+		E1E638791ABBF7A100C4C177 /* clr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clr.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 		E1E638041AB1689A00C4C177 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				E1E638791ABBF7A100C4C177 /* clr.png */,
 				E1E638741AB69A8000C4C177 /* del.png */,
 				E1E638701AB67C2900C4C177 /* tag.png */,
 				E1E638711AB67C2900C4C177 /* yes.png */,
@@ -286,6 +289,7 @@
 				E1E638721AB67C2900C4C177 /* tag.png in Resources */,
 				E141EB681AAC2B5100043072 /* Images.xcassets in Resources */,
 				E1E638731AB67C2900C4C177 /* yes.png in Resources */,
+				E1E6387A1ABBF7A100C4C177 /* clr.png in Resources */,
 				E1E638751AB69A8000C4C177 /* del.png in Resources */,
 				E1E638011AB15A7F00C4C177 /* list-add.png in Resources */,
 				E141EB811AAEBA8B00043072 /* background.png in Resources */,
