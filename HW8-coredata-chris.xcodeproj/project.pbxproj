@@ -29,6 +29,7 @@
 		E1E638751AB69A8000C4C177 /* del.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E638741AB69A8000C4C177 /* del.png */; };
 		E1E638781AB6B40600C4C177 /* PopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E638771AB6B40600C4C177 /* PopupViewController.m */; };
 		E1E6387A1ABBF7A100C4C177 /* clr.png in Resources */ = {isa = PBXBuildFile; fileRef = E1E638791ABBF7A100C4C177 /* clr.png */; };
+		E1E638801ABD471F00C4C177 /* PopupImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E6387F1ABD471F00C4C177 /* PopupImageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,8 @@
 		E1E638761AB6B40600C4C177 /* PopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupViewController.h; sourceTree = "<group>"; };
 		E1E638771AB6B40600C4C177 /* PopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupViewController.m; sourceTree = "<group>"; };
 		E1E638791ABBF7A100C4C177 /* clr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clr.png; sourceTree = "<group>"; };
+		E1E6387E1ABD471F00C4C177 /* PopupImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopupImageViewController.h; sourceTree = "<group>"; };
+		E1E6387F1ABD471F00C4C177 /* PopupImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopupImageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +141,8 @@
 				E141EB5D1AAC2B5100043072 /* Supporting Files */,
 				E1E638761AB6B40600C4C177 /* PopupViewController.h */,
 				E1E638771AB6B40600C4C177 /* PopupViewController.m */,
+				E1E6387E1ABD471F00C4C177 /* PopupImageViewController.h */,
+				E1E6387F1ABD471F00C4C177 /* PopupImageViewController.m */,
 			);
 			path = "HW8-coredata-chris";
 			sourceTree = "<group>";
@@ -312,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1E6386F1AB65D1900C4C177 /* Item.m in Sources */,
+				E1E638801ABD471F00C4C177 /* PopupImageViewController.m in Sources */,
 				E1E6386C1AB65CDF00C4C177 /* Tag.m in Sources */,
 				E1E638691AB65CDF00C4C177 /* Image.m in Sources */,
 				E1E637FD1AB154E300C4C177 /* NewItemView.m in Sources */,

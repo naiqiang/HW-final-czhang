@@ -960,5 +960,33 @@
             </objects>
             <point key="canvasLocation" x="825.5" y="561.5"/>
         </scene>
+        <!--Popup Image View Controller-->
+        <scene sceneID="gjf-VA-e4f">
+            <objects>
+                <viewController title="Popup Image View Controller" storyboardIdentifier="PopupImageViewController" id="BBZ-Od-Zq6" customClass="PopupImageViewController" sceneMemberID="viewController">
+                    <view key="view" id="sGj-5m-4kv">
+                        <rect key="frame" x="0.0" y="0.0" width="640" height="480"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fbg-jQ-JZ1">
+                                <rect key="frame" x="20" y="20" width="600" height="440"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="mQE-ob-sJC"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="fbg-jQ-JZ1" firstAttribute="leading" secondItem="sGj-5m-4kv" secondAttribute="leading" constant="20" id="Ktd-qY-ScG"/>
+                            <constraint firstAttribute="trailing" secondItem="fbg-jQ-JZ1" secondAttribute="trailing" constant="20" id="Xfz-Ti-imS"/>
+                            <constraint firstAttribute="bottom" secondItem="fbg-jQ-JZ1" secondAttribute="bottom" constant="20" id="aah-K5-lSd"/>
+                            <constraint firstItem="fbg-jQ-JZ1" firstAttribute="top" secondItem="sGj-5m-4kv" secondAttribute="top" constant="20" id="iHN-lT-Rwx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="fbg-jQ-JZ1" id="vMh-Ia-dPX"/>
+                    </connections>
+                </viewController>
+                <customObject id="lSr-jZ-xWB" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="958" y="894"/>
+        </scene>
     </scenes>
 </document>

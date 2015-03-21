@@ -15,6 +15,7 @@
 #import "NSManagedObject+Extensions.h"
 #import "Image.h"
 #import "Tag.h"
+#include "PopupImageViewController.h"
 
 @interface ViewController()
 
@@ -149,14 +150,45 @@
     
     for(Image* img in images)
     {
+#if 0
         NSImageView* invImgView = [[NSImageView alloc] initWithFrame:CGRectMake(x, y, w, h)];
         NSImage* loadImage = [[NSImage alloc] initWithContentsOfURL:[[NSURL alloc] initFileURLWithPath:img.imageURL]];
         
         [invImgView setImage: loadImage];
         [view addSubview:invImgView];
+#endif
+        NSButton* imgBtn = [[NSButton alloc] initWithFrame:CGRectMake(x,y, w, h)];
+        imgBtn.image = [[NSImage alloc] initWithContentsOfURL:[[NSURL alloc] initFileURLWithPath:img.imageURL]];
+        imgBtn.bordered = NO;
+        [imgBtn setTarget:self];
+        [imgBtn setAction:@selector(doSomething:)];
+        [view addSubview:imgBtn];
         
         x = x + w + div;
     }
+}
+
+-(void)doSomething:(id)sender
+{
+    NSLog(@"imgBtn action");
+    NSButton* view = ((NSButton*)sender);
+    
+    // get the main/default SB
+    NSStoryboard* sb = [NSStoryboard storyboardWithName:@"Main"  bundle:nil];
+    
+    // get the VC by its id
+    PopupImageViewController* vc = [sb instantiateControllerWithIdentifier:@"PopupImageViewController"];
+    
+    NSLog(@"img=%@", view.image);
+    
+    [self presentViewController:vc  asPopoverRelativeToRect:view.bounds
+                         ofView:view
+                  preferredEdge:NSMaxYEdge
+                       behavior:NSPopoverBehaviorTransient];
+
+    // must after view was popped up
+    [vc.imageView setImage: view.image];
+    
 }
 
 - (IBAction)onClickAddNewInv:(id)sender {
@@ -165,8 +197,7 @@
     if ([view.invDescTextView.string isEqualToString:@""])
     {
         // get the main/default SB
-        NSStoryboard* sb=
-        [NSStoryboard storyboardWithName:@"Main"  bundle:nil];
+        NSStoryboard* sb = [NSStoryboard storyboardWithName:@"Main"  bundle:nil];
         
         // get the VC by its id
         NSViewController* vc = [sb instantiateControllerWithIdentifier:@"PopupViewController"];
