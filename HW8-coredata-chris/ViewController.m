@@ -160,6 +160,8 @@
         NSButton* imgBtn = [[NSButton alloc] initWithFrame:CGRectMake(x,y, w, h)];
         imgBtn.image = [[NSImage alloc] initWithContentsOfURL:[[NSURL alloc] initFileURLWithPath:img.imageURL]];
         imgBtn.bordered = NO;
+        NSImageCell* cell = imgBtn.cell;
+        [cell setImageScaling:NSImageScaleProportionallyUpOrDown];
         [imgBtn setTarget:self];
         [imgBtn setAction:@selector(doSomething:)];
         [view addSubview:imgBtn];
@@ -254,12 +256,16 @@
              NSString* extension = fileNameWithExtension.pathExtension;
              NSURL* appDirUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory inDomains:NSUserDomainMask] firstObject];
              NSString *uuid = [[NSUUID UUID] UUIDString];
-             NSURL* targetURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@.%@",appDirUrl.absoluteString, @"HW-final-coredata", uuid, extension]];
+             NSURL* targetURL = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"%@%@/%@.%@",appDirUrl.absoluteString, @"czhang.HW.coredata", uuid, extension]];
              
-             //             NSLog(@"copy to %@", targetURL.relativePath);
+             NSLog(@"copy to %@", targetURL.relativePath);
              
              // copy image to app's location
-             [[NSFileManager defaultManager] copyItemAtURL:url toURL:targetURL error:nil];
+             NSError* error;
+             BOOL copied = [[NSFileManager defaultManager] copyItemAtURL:url toURL:targetURL error:&error];
+             if (!copied){
+                 NSLog(@"%@", error.description);
+             }
              
              image.imageURL = targetURL.relativePath;
              [self.pendingImages addObject:image];
